@@ -25,18 +25,26 @@ iframe {
 </label>
 <br>
 <button id="openIframe">open iframe in new tab</button>
-<button id="downloadBtn">download site</button>
+<button id="goToSite">go to site</button>
 
 <script>
-document.getElementById("openIframe").addEventListener("click", () => {
+function getProcessedUrl() {
     let url = document.getElementById("urlInput").value.trim();
-    if(!url) return alert("enter a valid url");
+    if (!url) {
+        alert("enter a valid url");
+        return null;
+    }
 
     const forceHttps = document.getElementById("forceHttps").checked;
-
-    if(forceHttps && !/^https?:\/\//i.test(url)) {
+    if (forceHttps && !/^https?:\/\//i.test(url)) {
         url = "https://" + url;
     }
+    return url;
+}
+
+document.getElementById("openIframe").addEventListener("click", () => {
+    const url = getProcessedUrl();
+    if (!url) return;
 
     const newTab = window.open("about:blank");
 
@@ -59,11 +67,8 @@ document.getElementById("openIframe").addEventListener("click", () => {
     newTab.document.close();
 });
 
-document.getElementById("downloadBtn").addEventListener("click", () => {
-    const link = document.createElement("a");
-    link.href = "download.html";
-    link.download = "download.html"; 
-    link.click();
+document.getElementById("goToSite").addEventListener("click", () => {
+    window.location.href = "https://lilcocoabean26.github.io/aboutblankinject";
 });
 </script>
 </body>
