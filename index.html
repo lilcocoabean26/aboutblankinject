@@ -17,8 +17,12 @@ iframe {
     height: 100%;
     border: none;
 }
+#main {
+    display: none;
+}
 </style>
 </head>
+<div id="main">
 <body>
 <h1>aboutblankinject</h1>
 <input type="text" id="urlInput" placeholder="enter site url" style="width:300px">
@@ -27,8 +31,11 @@ iframe {
 </label>
 <br>
 <button id="openIframe">open iframe in new tab</button>
-<button id="downloadBtn">download site</button>
 <h6>This work is marked <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/zero.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></h6>
+</div>
+<script> // show main content if js is enabled
+    document.getElementById("main").style.display = "block";
+</script>
 <script>
 document.getElementById("openIframe").addEventListener("click", () => {
     let url = document.getElementById("urlInput").value.trim();
