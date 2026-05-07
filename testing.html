@@ -47,6 +47,7 @@ html, body {
              alt=""
              style="max-width:1em;max-height:1em;margin-left:.2em;">
     </h6>
+    <p>2</p>
 </div>
 
 <script>
@@ -67,35 +68,17 @@ document.getElementById("openIframe").onclick = () => {
         return;
     }
 
-    const fileURL = URL.createObjectURL(file);
+    const reader = new FileReader();
 
-    newTab.document.open();
-    newTab.document.write(`
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<style>
-html, body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-}
+    reader.onload = () => {
+        // literally inject raw file contents
+        newTab.document.open();
+        newTab.document.write(reader.result);
+        newTab.document.close();
+    };
 
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-</style>
-</head>
-
-<body>
-<iframe src="${fileURL}"></iframe>
-</body>
-</html>
-    `);
-    newTab.document.close();
+    // read EVERYTHING as text
+    reader.readAsText(file);
 };
 </script>
 
